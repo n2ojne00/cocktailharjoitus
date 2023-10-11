@@ -1,3 +1,6 @@
+NETTA OJALA TIK23KM
+api_key: https://www.thecocktaildb.com/api/json/v1/1/random.php
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
