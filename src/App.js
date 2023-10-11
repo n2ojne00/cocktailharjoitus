@@ -7,7 +7,7 @@ const CocktailApp = () => {
   useEffect(() => {
     fetchRandomCocktail();
   }, []);
-//https://www.thecocktaildb.com/api/json/v1/1/random.php
+
   const fetchRandomCocktail = async () => {
     try {
       const response = await axios.get('..APIKEY HERE...');
