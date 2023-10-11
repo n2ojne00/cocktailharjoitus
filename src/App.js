@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function App() {
+const CocktailApp = () => {
+  const [cocktail, setCocktail] = useState(null);
+
+  useEffect(() => {
+    fetchRandomCocktail();
+  }, []);
+//https://www.thecocktaildb.com/api/json/v1/1/random.php
+  const fetchRandomCocktail = async () => {
+    try {
+      const response = await axios.get('..APIKEY HERE...');
+      const randomCocktail = response.data.drinks[0];
+      setCocktail(randomCocktail);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Random Cocktail</h1>
+      <button onClick={fetchRandomCocktail}>Give Me Another Cocktail</button>
+      {cocktail ? (
+        <div>
+          <h2>Drink: {cocktail.strDrink}</h2>
+          <h2>Does this contain alcohol? {cocktail.strAlcoholic}</h2>
+          <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} style={{ width: '200px', height: '200px' }} />
+          <p>Served as: {cocktail.strInstructions}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+      
     </div>
   );
-}
+};
 
-export default App;
+export default CocktailApp;
